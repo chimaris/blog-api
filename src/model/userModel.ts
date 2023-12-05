@@ -1,12 +1,12 @@
 import { DataTypes, Model } from "sequelize";
 import db from "../config/db.config";
-import { PostInstance } from "./postModel";
 
 export interface User {
 	id: string;
 	username: string;
 	email: string;
 	password: string;
+	resetPasswordToken: string;
 }
 
 export class UserInstance extends Model<User> {}
@@ -30,6 +30,10 @@ UserInstance.init(
 		password: {
 			type: DataTypes.STRING,
 			allowNull: false,
+		},
+		resetPasswordToken: {
+			type: DataTypes.STRING,
+			allowNull: true,
 		},
 	},
 	{ sequelize: db, tableName: "user" }

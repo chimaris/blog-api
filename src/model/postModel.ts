@@ -40,5 +40,5 @@ PostInstance.init(
 
 PostInstance.belongsTo(UserInstance, { foreignKey: "author", as: "author" });
 PostInstance.belongsTo(CategoryInstance, { foreignKey: "category", as: "category" });
-UserInstance.hasMany(PostInstance, { foreignKey: "author", as: "author" });
-CategoryInstance.hasMany(PostInstance, { foreignKey: "category", as: "category" });
+UserInstance.hasMany(PostInstance, { foreignKey: "posts", as: "posts" });
+CategoryInstance.hasMany(PostInstance, { foreignKey: "category", as: "categories" });

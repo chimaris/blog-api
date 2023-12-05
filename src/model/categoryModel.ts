@@ -1,6 +1,5 @@
 import { DataTypes, Model } from "sequelize";
 import db from "../config/db.config";
-import { PostInstance } from "./postModel";
 
 export interface Category {
 	id: string;
