@@ -7,6 +7,9 @@ export interface User {
 	email: string;
 	password: string;
 	resetPasswordToken: string;
+	googleId: string;
+	facebookId: string;
+	twitterId: string;
 }
 
 export class UserInstance extends Model<User> {}
@@ -32,6 +35,18 @@ UserInstance.init(
 			allowNull: false,
 		},
 		resetPasswordToken: {
+			type: DataTypes.STRING,
+			allowNull: true,
+		},
+		googleId: {
+			type: DataTypes.STRING,
+			allowNull: true,
+		},
+		facebookId: {
+			type: DataTypes.STRING,
+			allowNull: true,
+		},
+		twitterId: {
 			type: DataTypes.STRING,
 			allowNull: true,
 		},

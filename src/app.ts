@@ -3,15 +3,19 @@ import express, { Request, Response, NextFunction } from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+import cors from "cors";
+import "./controller/socialMediaAuth";
 
 import indexRouter from "./routes/index";
 import usersRouter from "./routes/users";
 import categoryRouter from "./routes/categories";
 import postRouter from "./routes/posts";
+import socialAuth from "./routes/socialAuths";
 
 import db from "./config/db.config";
+import passport from "passport";
+import session from "express-session";
 
-// force: true -  to drop the database
 db.sync()
 	.then(() => {
 		console.log("Database connected successfully!!");
@@ -27,15 +31,31 @@ app.set("views", path.join(__dirname, "..", "views"));
 app.set("view engine", "ejs");
 
 app.use(logger("dev"));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(
+	session({
+		secret: "keyboard cat",
+		resave: false,
+		saveUninitialized: true,
+		cookie: { secure: false },
+	})
+);
+
+// Initialize Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use("/", indexRouter);
 app.use("/api/v1/user", usersRouter);
 app.use("/api/v1/category", categoryRouter);
 app.use("/api/v1/post", postRouter);
+
+app.use("/", socialAuth);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
