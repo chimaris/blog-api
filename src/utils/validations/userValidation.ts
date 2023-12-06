@@ -22,7 +22,7 @@ export const registerUserSchema = Joi.object().keys({
 		"string.email": "Invalid email format",
 	}),
 	password: Joi.string().min(3).required().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
-	confirmPassword: Joi.any().equal(Joi.ref("password")).label("Confirm password").messages({ "any.only": "{{#label}} does not match" }),
+	confirmPassword: Joi.any().equal(Joi.ref("password")).label("Confirm password").required().messages({ "any.only": "{{#label}} does not match" }),
 });
 
 // Login validation

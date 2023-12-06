@@ -116,7 +116,10 @@ export const ForgetPassword = async (req: Request, res: Response) => {
 		await user.update({ ...req.body, resetPasswordToken: resetToken });
 
 		// Send reset password email to the user
-		await sendResetPasswordToken(email, resetToken);
+		const result = await sendResetPasswordToken(email, resetToken);
+		if (result instanceof Error) {
+			return res.status(500).json({ error: "Error sending an email" });
+		}
 
 		return res.status(200).json({ message: "Reset password link sent to your email" });
 	} catch (error) {

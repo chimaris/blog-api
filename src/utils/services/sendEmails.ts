@@ -17,7 +17,7 @@ export const sendResetPasswordToken = async (email: string, resetToken: string) 
 		from: MAIL_SETTINGS.auth.user,
 		to: email,
 		subject: "Reset Password",
-		text: `Click the following link to reset your password: http://localhost:5000/reset-password?token=${resetToken}`,
+		text: `Click the following link to reset your password: http://localhost:5000/api/v1/user/reset-password/${resetToken}`,
 	};
 
 	// Send the email
@@ -26,5 +26,6 @@ export const sendResetPasswordToken = async (email: string, resetToken: string) 
 		console.log("Email sent: ", info.response);
 	} catch (error) {
 		console.error("Error sending email: ", error);
+		return error;
 	}
 };

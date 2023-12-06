@@ -46,7 +46,13 @@ export const CreateCategory = async (req: Request | any, res: Response) => {
 // Get All Categories
 export const GetAllCategory = async (req: Request, res: Response) => {
 	try {
-		const allCategory = await CategoryInstance.findAndCountAll();
+		const allCategory = await CategoryInstance.findAndCountAll({
+			include: [
+				{
+					association: "posts",
+				},
+			],
+		});
 
 		return res.status(200).json({
 			message: "Category Retrieved Successfully",
@@ -63,7 +69,6 @@ export const GetAllCategory = async (req: Request, res: Response) => {
 
 // Get One Category
 export const GetOneCategory = async (req: Request, res: Response) => {
-	// get id of the category to update
 	const { id } = req.params;
 
 	try {
@@ -127,7 +132,6 @@ export const UpdateCategory = async (req: Request, res: Response) => {
 
 // Delete a Category
 export const DeleteCategory = async (req: Request, res: Response) => {
-	// get id of the organization to update
 	const { id } = req.params;
 
 	try {

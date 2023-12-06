@@ -7,8 +7,8 @@ export interface Post {
 	id: string;
 	title: string;
 	content: string;
-	category: string;
-	author: string;
+	categoryId: string;
+	authorId: string;
 }
 
 export class PostInstance extends Model<Post> {}
@@ -28,17 +28,17 @@ PostInstance.init(
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
-		category: {
+		categoryId: {
 			type: DataTypes.STRING,
 		},
-		author: {
+		authorId: {
 			type: DataTypes.STRING,
 		},
 	},
 	{ sequelize: db, tableName: "post" }
 );
 
-PostInstance.belongsTo(UserInstance, { foreignKey: "author", as: "author" });
-PostInstance.belongsTo(CategoryInstance, { foreignKey: "category", as: "category" });
-UserInstance.hasMany(PostInstance, { foreignKey: "posts", as: "posts" });
-CategoryInstance.hasMany(PostInstance, { foreignKey: "category", as: "categories" });
+PostInstance.belongsTo(UserInstance, { foreignKey: "authorId", as: "author" });
+PostInstance.belongsTo(CategoryInstance, { foreignKey: "categoryId", as: "category" });
+UserInstance.hasMany(PostInstance, { foreignKey: "authorId", as: "posts" });
+CategoryInstance.hasMany(PostInstance, { foreignKey: "categoryId", as: "posts" });

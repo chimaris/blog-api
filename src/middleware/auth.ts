@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { UserInstance } from "../model/userModel";
 
-export const authe = async (req: Request | any, res: Response, next: NextFunction) => {
+export const Auth = async (req: Request | any, res: Response, next: NextFunction) => {
 	// find the token from the header
 	const authorization = req.headers.authorization;
 
