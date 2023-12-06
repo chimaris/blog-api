@@ -8,29 +8,29 @@
 
 REST API for a content management system that has the following features:
 
-Posts: Create, Delete, Edit, and List posts
+1. Posts: Create, Delete, Edit, and List posts
 
-Categories: Create a post category, List all post categories, Edit a post category, Delete a post category.
+2. Categories: Create a post category, List all post categories, Edit a post category, Delete a post category.
 
-Users: Create a user, List all users, Delete a user, and Edit a single user’s profile information.
+3. Users: Create a user, List all users, Delete a user, and Edit a single user’s profile information.
 
-Bearer Token authentication
+4. Bearer Token authentication
 
-Using a third-party application like passportJs, implement a social login (Twitter, Google, Facebook).
+5. Using a third-party application like passportJs, implement a social login (Twitter, Google, Facebook).
 
-Admin: real-time dashboard endpoint that uses socket to get and send real-time data from/to a data source, such as a database or external API.
+6. Admin: real-time dashboard endpoint that uses socket to get and send real-time data from/to a data source, such as a database or external API.
 
 ## Stack
 
-For this project, I used the following:\
+For this project, I used the following:
 
-1. Express and Typescript\
-2. SQLITE for Database\
-3. PassportJs for google,facebook and twitter auth\
-4. JWT for Authentication and Authorization\
+1. Express and Typescript
+2. SQLITE for Database
+3. PassportJs for google,facebook and twitter auth
+4. JWT for Authentication and Authorization
 5. Socket io for real time
 
-## Postman documentation URL
+## Postman documentation link
 
 https://documenter.getpostman.com/view/8053960/2s9YeN28XR
 
