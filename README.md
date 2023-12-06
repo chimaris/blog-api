@@ -6,7 +6,9 @@
 
 ## About this project
 
-REST API for a content management system that has the following features: Posts: Create, Delete, Edit, and List posts
+REST API for a content management system that has the following features:
+
+Posts: Create, Delete, Edit, and List posts
 
 Categories: Create a post category, List all post categories, Edit a post category, Delete a post category.
 
@@ -21,11 +23,12 @@ Admin: real-time dashboard endpoint that uses socket to get and send real-time d
 ## Stack
 
 For this project, I used the following:\
-1.Express\
-2.SQLITE\
-3.PassportJs for google,facebook and twitter auth\
-4.JWT for Authentication and Authorization\
-5.Socket io for real time
+
+1. Express and Typescript\
+2. SQLITE for Database\
+3. PassportJs for google,facebook and twitter auth\
+4. JWT for Authentication and Authorization\
+5. Socket io for real time
 
 ## Postman documentation URL
 
