@@ -1,0 +1,36 @@
+<!-- dashboard.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Admin Dashboard</title>
+	</head>
+	<body>
+		<h1>Welcome to the Admin Dashboard</h1>
+
+		<!-- Include Socket.IO client script -->
+		<script src="/socket.io/socket.io.js"></script>
+
+		<script>
+			const socket = io();
+
+			// Join a room
+			socket.emit("join", "admin_room");
+
+			// Listen for a message from the server
+			socket.on("message", (message) => {
+				console.log("Message from server:", message);
+			});
+
+			// Listen for post_created event
+			socket.on("post_created", (postData) => {
+				console.log("New post created:", postData);
+
+				// i can update the dashboard UI or take any other action here
+			});
+
+			// Add other Socket.IO logic for real-time events
+		</script>
+	</body>
+</html>

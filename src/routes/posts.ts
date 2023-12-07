@@ -5,8 +5,8 @@ import { Auth } from "../middleware/auth";
 const router = express.Router();
 
 router.post("/create-post", Auth, CreatePost);
-router.patch("/update-post/:id", UpdatePost);
-router.delete("/delete-post/:id", DeletePost);
+router.patch("/update-post/:id", Auth, UpdatePost);
+router.delete("/delete-post/:id", Auth, DeletePost);
 router.get("/", GetAllPost);
 router.get("/:id", GetOnePost);
 

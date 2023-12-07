@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { Socket } from "socket.io";
 import { v4 as uuidv4 } from "uuid";
 import { PostInstance } from "../model/postModel";
 import { createPostSchema, updatePostSchema } from "../utils/validations/postValidation";
@@ -20,18 +21,15 @@ export const CreatePost = async (req: Request | any, res: Response) => {
 	}
 
 	try {
-		// const existingPost = await PostInstance.findOne({ where: { name } });
-		// if (existingPost) {
-		// 	return res.status(409).json({
-		// 		message: "Post already exists",
-		// 	});
-		// }
-
 		const newPost = await PostInstance.create({
 			id: uuid,
 			authorId: id,
 			...req.body,
 		});
+
+		// Notify the admin about the new post
+		const io: Socket = req.app.get("socketio");
+		io.to("admin_room").emit("post_created", { postId: newPost.dataValues.id, title: newPost.dataValues.title });
 
 		return res.status(201).json({
 			message: "Created Successfully",

@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 import { CategoryInstance } from "../model/categoryModel";
 import { createCategorySchema } from "../utils/validations/categoryValidation";

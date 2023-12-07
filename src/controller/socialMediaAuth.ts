@@ -3,10 +3,9 @@ dotenv.config();
 import passport from "passport";
 import { Strategy as TwitterStrategy } from "passport-twitter";
 import { Strategy as GoogleStrategy } from "passport-google-oauth2";
-import { Strategy as FacebookStrategy } from "passport-facebook";
+// import { Strategy as FacebookStrategy } from "passport-facebook";
 import { UserInstance } from "../model/userModel";
 import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
 
 export interface Google {
 	id: string;
@@ -18,23 +17,8 @@ export interface Google {
 }
 
 // PassportJS setup
-passport.use(
-	new TwitterStrategy(
-		{
-			consumerKey: process.env.TWITTER_CONSUMER_KEY!,
-			consumerSecret: process.env.TWITTER_CONSUMER_SECRET!,
-			callbackURL: "http://localhost:5000/social-login/twitter/callback",
-			passReqToCallback: true,
-			includeEmail: true, // Request email address
-		},
-		async (token, tokenSecret, profile, done) => {
-			console.log("Twitter Auth", profile);
 
-			// Handle user creation and token generation here
-		}
-	)
-);
-
+// Google Strategy
 passport.use(
 	new GoogleStrategy(
 		{
@@ -43,10 +27,8 @@ passport.use(
 			callbackURL: "http://localhost:5000/google/callback",
 			passReqToCallback: true,
 		},
-		// (accessToken, refreshToken, profile, done) => {
 		async (request: any, accessToken: string, refreshToken: string, profile: Google, done: any) => {
 			console.log("Google Auth ", profile);
-			// Handle user creation and token generation here
 			try {
 				console.log("Helloouuuu");
 				const user = await UserInstance.findOne({
@@ -87,6 +69,27 @@ passport.use(
 	)
 );
 
+// Twitter Strategy
+passport.use(
+	new TwitterStrategy(
+		{
+			consumerKey: process.env.TWITTER_CONSUMER_KEY!,
+			consumerSecret: process.env.TWITTER_CONSUMER_SECRET!,
+			callbackURL: "http://localhost:5000/social-login/twitter/callback",
+			passReqToCallback: true,
+			includeEmail: true, // Request email address
+		},
+		async (token, tokenSecret, profile, done) => {
+			console.log("Twitter Auth", profile);
+
+			// Handle user creation and token generation here
+		}
+	)
+);
+
+// I counld not get the facebook clientId and clientSecret because I was having issue with my facebook account
+
+// Facebook Strategy
 // passport.use(
 // 	new FacebookStrategy(
 // 		{

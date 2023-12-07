@@ -66,8 +66,8 @@ export const Login = async (req: Request, res: Response, next: NextFunction) => 
 		// Destructure user id and fullname for token
 		const { id, fullname } = user as unknown as { [key: string]: string };
 
-		// Sign a token that will expire in 30 minutes
-		const token = jwt.sign({ id, fullname }, jwtSecret, { expiresIn: "30m" });
+		// Sign a token that will expire in 1 day
+		const token = jwt.sign({ id, fullname }, jwtSecret, { expiresIn: "1d" });
 
 		// Save the token in an HTTP-only cookie
 		res.cookie("token", token, {

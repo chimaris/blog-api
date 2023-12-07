@@ -29,6 +29,7 @@ For this project, I used the following:
 3. PassportJs for google,facebook and twitter auth
 4. JWT for Authentication and Authorization
 5. Socket io for real time
+6. Joi for input validation
 
 ## Postman documentation link
 

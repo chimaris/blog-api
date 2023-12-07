@@ -1,3 +1,4 @@
+import http from "http";
 import createError from "http-errors";
 import express, { Request, Response, NextFunction } from "express";
 import path from "path";
@@ -11,20 +12,34 @@ import usersRouter from "./routes/users";
 import categoryRouter from "./routes/categories";
 import postRouter from "./routes/posts";
 import socialAuth from "./routes/socialAuths";
+import adminRouter from "./routes/admin";
 
 import db from "./config/db.config";
 import passport from "passport";
 import session from "express-session";
+import io from "socket.io";
+import { initializeSocketIO } from "./routes/admin";
+
+const app = express();
+const server = http.createServer(app);
+const socketIO = new io.Server(server);
+
+// Initialize Socket.IO for admin dashboard
+initializeSocketIO(socketIO);
+
+// Attach Socket.IO instance to the app
+app.set("socketio", socketIO);
 
 db.sync()
 	.then(() => {
 		console.log("Database connected successfully!!");
+		socketIO.on("connection", (socket) => {
+			console.log("Client connected successfully!!");
+		});
 	})
 	.catch((err: createError.HttpError) => {
 		console.log(err);
 	});
-
-const app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "..", "views"));
@@ -56,6 +71,7 @@ app.use("/api/v1/category", categoryRouter);
 app.use("/api/v1/post", postRouter);
 
 app.use("/", socialAuth);
+app.use("/admin", adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
