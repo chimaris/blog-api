@@ -78,7 +78,19 @@ export const GetOnePost = async (req: Request, res: Response) => {
 
 	try {
 		// find the data to update from database
-		const post = await PostInstance.findOne({ where: { id }, include: [{ model: UserInstance, as: "author" }] });
+		const post = await PostInstance.findOne({
+			where: { id },
+			include: [
+				{
+					model: UserInstance,
+					as: "author",
+				},
+				{
+					model: CategoryInstance,
+					as: "category",
+				},
+			],
+		});
 
 		if (!post) {
 			return res.status(400).json({

@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken";
 import { generateToken } from "../utils/utils";
 import { sendResetPasswordToken } from "../utils/services/sendEmails";
 import { PostInstance } from "../model/postModel";
+import { CategoryInstance } from "../model/categoryModel";
 
 const jwtSecret = process.env.JWT_SECRET as string;
 
@@ -184,6 +185,13 @@ export const getAllUsers = async (req: Request, res: Response) => {
 			{
 				model: PostInstance,
 				as: "posts",
+
+				include: [
+					{
+						model: CategoryInstance,
+						as: "category",
+					},
+				],
 			},
 		],
 	});
