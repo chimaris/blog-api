@@ -18,7 +18,7 @@ router.get("/social-login/twitter/callback", passport.authenticate("twitter", { 
 router.get("/google", passport.authenticate("google", { scope: ["email", "profile"] }));
 
 // Google callback URL
-router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/", successRedirect: "/" }), (req, res) => {
+router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/home", successRedirect: "/" }), (req, res) => {
 	// Redirect or respond as needed after successful authentication
 	console.log("Google login successful");
 });
